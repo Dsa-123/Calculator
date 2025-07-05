@@ -197,6 +197,6 @@ button:active {
     }
 }
 
-*:focus {
+button:focus {
     outline: none;
 }
