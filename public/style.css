@@ -32,14 +32,14 @@ body {
 }
 
 .display-container {
-    background: rgba(15, 23, 42, 0.8);
+    background: black;
     border-radius: 15px;
     padding: 20px;
     margin-bottom: 30px;
     height: 120px;
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    border: 1px solid rgba(17, 20, 28, 0.8);
 }
 
 .previous-operation {
