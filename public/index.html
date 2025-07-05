@@ -17,17 +17,17 @@
             <button class="clear" onclick="clearDisplay()">C</button>
             <button class="clear" onclick="clearEntry()">CE</button>
             <button class="operator" onclick="deleteLast()">⌫</button>
-            <button class="operator" onclick="addToDisplay('/')">÷</button>
+            <button class="operator" onclick="addToDisplay('÷')">÷</button>
             
             <button onclick="addToDisplay('7')">7</button>
             <button onclick="addToDisplay('8')">8</button>
             <button onclick="addToDisplay('9')">9</button>
-            <button class="operator" onclick="addToDisplay('*')">×</button>
+            <button class="operator" onclick="addToDisplay('×')">×</button>
             
             <button onclick="addToDisplay('4')">4</button>
             <button onclick="addToDisplay('5')">5</button>
             <button onclick="addToDisplay('6')">6</button>
-            <button class="operator" onclick="addToDisplay('-')">−</button>
+            <button class="operator" onclick="addToDisplay('−')">−</button>
             
             <button onclick="addToDisplay('1')">1</button>
             <button onclick="addToDisplay('2')">2</button>
@@ -51,7 +51,7 @@
         }
         
         function updateDisplay() {
-            display.textContent = currentInput;
+            display.textContent = currentInput.toLocaleString();
         }
 
         function addToDisplay(value) {
