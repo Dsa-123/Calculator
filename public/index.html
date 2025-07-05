@@ -113,13 +113,14 @@
             } else if (key === '+') {
                 addToDisplay('+');
             } else if (key === '-') {
-                addToDisplay('-');
+                addToDisplay('−');
             } else if (key === '*') {
-                addToDisplay('*');
+                addToDisplay('×');
             } else if (key === '/') {
                 event.preventDefault();
-                addToDisplay('/');
+                addToDisplay('÷');
             } else if (key === 'Enter' || key === '=') {
+                event.preventDefault()
                 calculate();
             } else if (key === 'Escape' || key === 'c' || key === 'C') {
                 clearDisplay();
