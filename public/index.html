@@ -117,9 +117,7 @@
         document.addEventListener('keydown', function(event) {
             const key = event.key;
             
-            if (key >= '0' && key <= '9') {
-                addToDisplay(key);
-            } else if (key === '.') {
+            if (key === '.') {
                 addToDisplay('.');
             } else if (key === '+') {
                 addToDisplay('+');
@@ -128,7 +126,7 @@
             } else if (key === '*') {
                 addToDisplay('×');
             } else if (key === '/') {
-                event.preventDefault();
+                event.preventDefault();                
                 addToDisplay('÷');
             } else if (key === 'Enter' || key === '=') {
                 event.preventDefault();
@@ -137,6 +135,9 @@
                 clearDisplay();
             } else if (key === 'Backspace') {
                 deleteLast();
+            }
+            else if (key >= '0' && key <= '9') {
+                addToDisplay(key);
             }
         });
     </script>
