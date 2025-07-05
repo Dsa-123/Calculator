@@ -196,3 +196,7 @@ button:active {
         gap: 12px;
     }
 }
+
+*:focus {
+    outline: none;
+}
