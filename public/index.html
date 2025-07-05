@@ -93,7 +93,7 @@
 
         function calculate() {
             try {
-                let expression = currentInput.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
+                let expression = currentInput.replace(/,/g, '').replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
                 
                 let result = eval(expression);
                 
