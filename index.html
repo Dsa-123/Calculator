@@ -3,479 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fun Calculator</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        body.dark-mode {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-        }
-
-        /* Floating Math Symbols */
-        .math-symbols {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .math-symbol {
-            position: absolute;
-            font-size: 2rem;
-            opacity: 0.1;
-            color: #ffffff;
-            animation: float 10s infinite linear;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Calculator Container */
-        .calculator {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            width: 400px;
-            max-width: 90vw;
-            position: relative;
-            z-index: 10;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        body.dark-mode .calculator {
-            background: rgba(45, 55, 72, 0.95);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-        }
-
-        /* Header */
-        .calculator-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .calculator-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #667eea;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        body.dark-mode .calculator-title {
-            color: #81c784;
-        }
-
-        .theme-toggle {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border: none;
-            border-radius: 50px;
-            padding: 10px 20px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        body.dark-mode .theme-toggle {
-            background: linear-gradient(45deg, #81c784, #66bb6a);
-        }
-
-        .theme-toggle:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Display */
-        .display {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border: 2px solid #667eea;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            min-height: 120px;
-            position: relative;
-            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        body.dark-mode .display {
-            background: linear-gradient(135deg, #2d3748, #4a5568);
-            border-color: #81c784;
-            color: #ffffff;
-        }
-
-        .history {
-            font-size: 1rem;
-            color: #6c757d;
-            margin-bottom: 10px;
-            min-height: 20px;
-            word-wrap: break-word;
-        }
-
-        body.dark-mode .history {
-            color: #a0aec0;
-        }
-
-        .current-input {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #212529;
-            text-align: right;
-            min-height: 40px;
-            word-wrap: break-word;
-        }
-
-        body.dark-mode .current-input {
-            color: #ffffff;
-        }
-
-        .result {
-            font-size: 1.5rem;
-            color: #28a745;
-            text-align: right;
-            margin-top: 10px;
-            min-height: 30px;
-            font-weight: bold;
-        }
-
-        body.dark-mode .result {
-            color: #81c784;
-        }
-
-        /* Buttons Grid */
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .btn {
-            height: 70px;
-            border: none;
-            border-radius: 15px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn:before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            transform: translate(-50%, -50%);
-        }
-
-        .btn:active:before {
-            width: 100%;
-            height: 100%;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Number buttons */
-        .btn-number {
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
-            color: #333;
-            border: 2px solid #e9ecef;
-        }
-
-        body.dark-mode .btn-number {
-            background: linear-gradient(135deg, #4a5568, #2d3748);
-            color: #ffffff;
-            border-color: #718096;
-        }
-
-        /* Operator buttons */
-        .btn-operator {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        body.dark-mode .btn-operator {
-            background: linear-gradient(135deg, #81c784, #66bb6a);
-        }
-
-        /* Special buttons */
-        .btn-clear {
-            background: linear-gradient(135deg, #dc3545, #c82333);
-            color: white;
-        }
-
-        .btn-equals {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-        }
-
-        .btn-fun {
-            background: linear-gradient(135deg, #ffc107, #fd7e14);
-            color: white;
-        }
-
-        /* Fun Features */
-        .easter-egg {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 1.5rem;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .celebration {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1000;
-        }
-
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #ff6b6b;
-            animation: confetti-fall 3s linear infinite;
-        }
-
-        @keyframes confetti-fall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Error shake animation */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        .error-shake {
-            animation: shake 0.5s ease-in-out;
-        }
-
-        /* Responsive */
-        @media (max-width: 480px) {
-            .calculator {
-                width: 95vw;
-                padding: 20px;
-            }
-            
-            .btn {
-                height: 60px;
-                font-size: 1.1rem;
-            }
-            
-            .current-input {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    <title>Calculator</title>
 </head>
 <body>
-    <!-- Floating Math Symbols -->
-    <div class="math-symbols" id="mathSymbols"></div>
-    
-    <!-- Calculator -->
     <div class="calculator">
-        <div class="calculator-header">
-            <h1 class="calculator-title">🔢 Fun Calc</h1>
-            <button class="theme-toggle" onclick="toggleTheme()">
-                <span id="themeIcon">🌙 Dark</span>
-            </button>
-        </div>
-
-        <div class="display">
-            <div class="history" id="history"></div>
-            <div class="current-input" id="currentInput">0</div>
-            <div class="result" id="result"></div>
-            <div class="easter-egg" id="easterEgg">🎯</div>
-        </div>
-
+        <div class="display" id="display">0</div>
         <div class="buttons">
-            <button class="btn btn-clear" onclick="clearAll()">C</button>
-            <button class="btn btn-clear" onclick="clearEntry()">CE</button>
-            <button class="btn btn-operator" onclick="inputOperator('%')">%</button>
-            <button class="btn btn-operator" onclick="inputOperator('/')">÷</button>
-
-            <button class="btn btn-number" onclick="inputNumber('7')">7</button>
-            <button class="btn btn-number" onclick="inputNumber('8')">8</button>
-            <button class="btn btn-number" onclick="inputNumber('9')">9</button>
-            <button class="btn btn-operator" onclick="inputOperator('*')">×</button>
-
-            <button class="btn btn-number" onclick="inputNumber('4')">4</button>
-            <button class="btn btn-number" onclick="inputNumber('5')">5</button>
-            <button class="btn btn-number" onclick="inputNumber('6')">6</button>
-            <button class="btn btn-operator" onclick="inputOperator('-')">-</button>
-
-            <button class="btn btn-number" onclick="inputNumber('1')">1</button>
-            <button class="btn btn-number" onclick="inputNumber('2')">2</button>
-            <button class="btn btn-number" onclick="inputNumber('3')">3</button>
-            <button class="btn btn-operator" onclick="inputOperator('+')">+</button>
-
-            <button class="btn btn-fun" onclick="inputSpecial('π')">π</button>
-            <button class="btn btn-number" onclick="inputNumber('0')">0</button>
-            <button class="btn btn-number" onclick="inputNumber('.')">.</button>
-            <button class="btn btn-equals" onclick="calculate()">=</button>
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="clear" onclick="clearEntry()">CE</button>
+            <button class="operator" onclick="deleteLast()">⌫</button>
+            <button class="operator" onclick="addToDisplay('/')">÷</button>
+            
+            <button onclick="addToDisplay('7')">7</button>
+            <button onclick="addToDisplay('8')">8</button>
+            <button onclick="addToDisplay('9')">9</button>
+            <button class="operator" onclick="addToDisplay('*')">×</button>
+            
+            <button onclick="addToDisplay('4')">4</button>
+            <button onclick="addToDisplay('5')">5</button>
+            <button onclick="addToDisplay('6')">6</button>
+            <button class="operator" onclick="addToDisplay('-')">−</button>
+            
+            <button onclick="addToDisplay('1')">1</button>
+            <button onclick="addToDisplay('2')">2</button>
+            <button onclick="addToDisplay('3')">3</button>
+            <button class="operator" onclick="addToDisplay('+')">+</button>
+            
+            <button class="zero" onclick="addToDisplay('0')">0</button>
+            <button onclick="addToDisplay('.')">.</button>
+            <button class="equals" onclick="calculate()">=</button>
         </div>
     </div>
 
-    <!-- Celebration container -->
-    <div class="celebration" id="celebration"></div>
-
     <script>
+        let display = document.getElementById('display');
         let currentInput = '0';
-        let history = '';
         let shouldResetDisplay = false;
-        let isDarkMode = false;
-
-        const mathSymbols = ['+', '-', '×', '÷', '=', '%', 'π', '∞', '∑', '∆', '∫', '√', '²', '³'];
-
-        function createMathSymbols() {
-            const container = document.getElementById('mathSymbols');
-            
-            setInterval(() => {
-                const symbol = document.createElement('div');
-                symbol.className = 'math-symbol';
-                symbol.textContent = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
-                symbol.style.left = Math.random() * 100 + '%';
-                symbol.style.fontSize = (Math.random() * 2 + 1) + 'rem';
-                symbol.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                
-                container.appendChild(symbol);
-                
-                setTimeout(() => {
-                    container.removeChild(symbol);
-                }, 10000);
-            }, 1000);
-        }
 
         function updateDisplay() {
-            document.getElementById('currentInput').textContent = currentInput;
-            document.getElementById('history').textContent = history;
+            display.textContent = currentInput;
         }
 
-        function inputNumber(num) {
+        function addToDisplay(value) {
             if (shouldResetDisplay) {
                 currentInput = '0';
                 shouldResetDisplay = false;
             }
             
-            if (currentInput === '0' && num !== '.') {
-                currentInput = num;
+            if (currentInput === '0' && value !== '.') {
+                currentInput = value;
+            } else if (value === '.' && currentInput.includes('.')) {
+                return;
             } else {
-                currentInput += num;
+                currentInput += value;
             }
             
             updateDisplay();
         }
 
-        function inputOperator(op) {
-            if (shouldResetDisplay) {
-                shouldResetDisplay = false;
-            }
-            
-            // Convert display operators to calculation operators
-            const calcOp = op === '×' ? '*' : op === '÷' ? '/' : op;
-            
-            // If the last character is already an operator, replace it
-            if (isOperator(currentInput.slice(-1))) {
-                currentInput = currentInput.slice(0, -1) + calcOp;
-            } else {
-                currentInput += calcOp;
-            }
-            
-            updateDisplay();
-        }
-
-        function inputSpecial(special) {
-            if (special === 'π') {
-                if (shouldResetDisplay) {
-                    currentInput = '0';
-                    shouldResetDisplay = false;
-                }
-                
-                if (currentInput === '0') {
-                    currentInput = Math.PI.toString();
-                } else {
-                    currentInput += '*' + Math.PI.toString();
-                }
-                
-                updateDisplay();
-            }
-        }
-
-        function isOperator(char) {
-            return ['+', '-', '*', '/', '%'].includes(char);
-        }
-
-        function clearAll() {
+        function clearDisplay() {
             currentInput = '0';
-            history = '';
-            document.getElementById('result').textContent = '';
             updateDisplay();
         }
 
@@ -484,126 +71,59 @@
             updateDisplay();
         }
 
+        function deleteLast() {
+            if (currentInput.length > 1) {
+                currentInput = currentInput.slice(0, -1);
+            } else {
+                currentInput = '0';
+            }
+            updateDisplay();
+        }
+
         function calculate() {
             try {
-                // Replace display operators with calculation operators
-                let expression = currentInput
-                    .replace(/×/g, '*')
-                    .replace(/÷/g, '/')
-                    .replace(/π/g, Math.PI.toString());
+                let expression = currentInput.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
                 
-                // Evaluate the expression
-                const result = eval(expression);
+                let result = eval(expression);
                 
-                // Check for special results
-                if (result === 42) {
-                    showEasterEgg('🎉 The Answer to Everything!');
-                } else if (result === 69 || result === 420) {
-                    showEasterEgg('😏 Nice!');
-                } else if (result === 666) {
-                    showEasterEgg('😈 Spooky!');
-                } else if (result === 1337) {
-                    showEasterEgg('🔥 Leet!');
-                } else if (result.toString().includes('123456')) {
-                    showEasterEgg('🎯 Sequential!');
+                if (!isFinite(result)) {
+                    currentInput = 'Error';
+                } else {
+                    currentInput = result.toString();
                 }
                 
-                // Update display
-                history = currentInput + ' =';
-                currentInput = result.toString();
-                document.getElementById('result').textContent = '= ' + result;
                 shouldResetDisplay = true;
-                
-                // Celebrate if result is a round number
-                if (result % 100 === 0 && result !== 0) {
-                    createConfetti();
-                }
-                
-                updateDisplay();
             } catch (error) {
-                showError();
+                currentInput = 'Error';
+                shouldResetDisplay = true;
             }
+            
+            updateDisplay();
         }
 
-        function showError() {
-            const calculator = document.querySelector('.calculator');
-            calculator.classList.add('error-shake');
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
             
-            document.getElementById('result').textContent = 'Error';
-            
-            setTimeout(() => {
-                calculator.classList.remove('error-shake');
-            }, 500);
-        }
-
-        function showEasterEgg(message) {
-            const easterEgg = document.getElementById('easterEgg');
-            easterEgg.textContent = message;
-            easterEgg.style.animation = 'bounce 0.5s ease-in-out 3';
-            
-            setTimeout(() => {
-                easterEgg.textContent = '🎯';
-                easterEgg.style.animation = 'bounce 2s infinite';
-            }, 3000);
-        }
-
-        function createConfetti() {
-            const container = document.getElementById('celebration');
-            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#f0932b', '#eb4d4b', '#6c5ce7'];
-            
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'confetti';
-                    confetti.style.left = Math.random() * 100 + '%';
-                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.animationDelay = Math.random() * 3 + 's';
-                    
-                    container.appendChild(confetti);
-                    
-                    setTimeout(() => {
-                        container.removeChild(confetti);
-                    }, 3000);
-                }, i * 50);
-            }
-        }
-
-        function toggleTheme() {
-            isDarkMode = !isDarkMode;
-            document.body.classList.toggle('dark-mode');
-            
-            const themeIcon = document.getElementById('themeIcon');
-            themeIcon.textContent = isDarkMode ? '☀️ Light' : '🌙 Dark';
-        }
-
-        // Keyboard support
-        document.addEventListener('keydown', (e) => {
-            const key = e.key;
-            
-            if (key >= '0' && key <= '9' || key === '.') {
-                inputNumber(key);
-            } else if (key === '+' || key === '-') {
-                inputOperator(key);
+            if (key >= '0' && key <= '9') {
+                addToDisplay(key);
+            } else if (key === '.') {
+                addToDisplay('.');
+            } else if (key === '+') {
+                addToDisplay('+');
+            } else if (key === '-') {
+                addToDisplay('-');
             } else if (key === '*') {
-                inputOperator('×');
+                addToDisplay('*');
             } else if (key === '/') {
-                e.preventDefault();
-                inputOperator('÷');
-            } else if (key === '%') {
-                inputOperator('%');
+                event.preventDefault();
+                addToDisplay('/');
             } else if (key === 'Enter' || key === '=') {
                 calculate();
             } else if (key === 'Escape' || key === 'c' || key === 'C') {
-                clearAll();
+                clearDisplay();
             } else if (key === 'Backspace') {
-                clearEntry();
+                deleteLast();
             }
-        });
-
-        // Initialize
-        window.addEventListener('load', () => {
-            createMathSymbols();
-            updateDisplay();
         });
     </script>
 </body>
