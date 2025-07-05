@@ -88,6 +88,12 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;    
 }
 
 button:active {
@@ -195,8 +201,4 @@ button:active {
     .buttons {
         gap: 12px;
     }
-}
-
-button:focus {
-    outline: none;
 }
