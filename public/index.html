@@ -102,7 +102,7 @@
                     currentInput = 'Error';
                 } else {
                     updatePreviousOperation(currentInput + ' =');
-                    currentInput = result.toString();
+                    currentInput = result.toLocaleString();
                 }
                 
             } catch (error) {
