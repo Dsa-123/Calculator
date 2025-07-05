@@ -9,7 +9,10 @@
 </head>
 <body>
     <div class="calculator">
-        <div class="display" id="display">0</div>
+        <div class="display-container">
+            <div class="previous-operation" id="previous-operation"></div>
+            <div class="display" id="display">0</div>
+        </div>
         <div class="buttons">
             <button class="clear" onclick="clearDisplay()">C</button>
             <button class="clear" onclick="clearEntry()">CE</button>
@@ -42,6 +45,10 @@
         let currentInput = '0';
         let shouldResetDisplay = false;
 
+        function updatePreviousOperation(text) {
+            previousOperation.textContent = text;
+        }
+        
         function updateDisplay() {
             display.textContent = currentInput;
         }
@@ -66,6 +73,7 @@
         function clearDisplay() {
             currentInput = '0';
             updateDisplay();
+            updatePreviousOperation('');
         }
 
         function clearEntry() {
@@ -89,12 +97,15 @@
                 let result = eval(expression);
                 
                 if (!isFinite(result)) {
+                    updatePreviousOperation('ᴇʀʀᴏʀ');
                     currentInput = 'Error';
                 } else {
+                    updatePreviousOperation(currentInput + ' =');
                     currentInput = result.toString();
                 }
                 
             } catch (error) {
+                updatePreviousOperation('ᴇʀʀᴏʀ');
                 currentInput = 'Error';
                 shouldResetDisplay = true;
             }

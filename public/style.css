@@ -31,15 +31,35 @@ body {
     position: relative;
 }
 
-.display {
-    background: #000000;
-    color: white;
-    font-size: 4rem;
-    font-weight: 200;
+.display-container {
+    background: rgba(15, 23, 42, 0.8);
+    border-radius: 15px;
     padding: 20px;
-    text-align: right;
     margin-bottom: 30px;
     height: 120px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.previous-operation {
+    color: gray;
+    font-size: 1.2rem;
+    font-weight: 300;
+    text-align: right;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+}
+
+.display {
+    color: #f1f5f9;
+    font-size: 3.5rem;
+    font-weight: 200;
+    text-align: right;
+    flex: 1;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
