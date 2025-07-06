@@ -89,8 +89,8 @@ button {
 }
 
 .icon{
-    width: 75%;
-    height: 75%;
+    width: 70%;
+    height: 70%;
     object-fit: cover;
     padding: 4px;
     filter: invert(1);
