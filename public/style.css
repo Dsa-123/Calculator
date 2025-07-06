@@ -85,9 +85,6 @@ button {
     /* Remove all highlight effects */
     outline: none;
     -webkit-tap-highlight-color: transparent;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
     border: 1px solid #404040;
 }

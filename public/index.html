@@ -14,9 +14,11 @@
             <div class="display" id="display">0</div>
         </div>
         <div class="buttons">
-            <button class="clear" onclick="clearDisplay()">C</button>
-            <button class="clear" onclick="clearEntry()">CE</button>
-            <button class="operator" onclick="deleteLast()">⌫</button>
+            <button class="clear" onclick="clearDisplay()">AC</button>
+            <button class="plus-minus" onclick="switchSign()">
+                <img src="images/plus-minus_2.png" alt="Switch Sign">
+            </button>
+            <button class="operator" onclick="deleteLast()">%</button>
             <button class="operator" onclick="addToDisplay('÷')">÷</button>
             
             <button onclick="addToDisplay('7')">7</button>
@@ -64,6 +66,8 @@
                 currentInput = value;
             } else if (value === '.' && currentInput.includes('.')) {
                 return;
+            } else if (['÷', '×', '−', '+'].includes(currentInput[currentInput.length - 1])){
+                currentInput[currentInput.length - 1] = value;
             } else {
                 currentInput += value;
             }
@@ -89,6 +93,11 @@
                 currentInput = '0';
             }
             updateDisplay();
+        }
+
+        function switchSign() {
+            currentInput *= - 1;
+            updateDisplay()
         }
 
         function calculate() {
