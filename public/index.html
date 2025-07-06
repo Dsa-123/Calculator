@@ -48,12 +48,32 @@
         let currentInput = '0';
         let shouldResetDisplay = false;
 
+        function formatNumber(num) {
+            if (num === '0' || num === 'Error' || num === '') {
+                return num;
+            }
+            
+            let numStr = num.toString().replace(/,/g, '');
+            
+            if (isNaN(numStr) || numStr === '') {
+                return num;
+            }
+            
+            let parts = numStr.split('.');
+            let integerPart = parts[0];
+            let decimalPart = parts[1];
+            
+            integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            
+            return decimalPart ? integerPart + '.' + decimalPart : integerPart;
+        }
+
         function updatePreviousOperation(text) {
             previousOperation.textContent = text;
         }
         
         function updateDisplay() {
-            display.textContent = currentInput;
+            display.textContent = formatNumber(currentInput);
         }
 
         function addToDisplay(value) {
