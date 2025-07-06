@@ -18,7 +18,7 @@
             <button class="plus-minus" onclick="switchSign()">
                 <img class="icon" src="images/plus-minus.png" alt="Switch Sign">
             </button>
-            <button class="operator" onclick="deleteLast()">%</button>
+            <button class="operator" onclick="addToDisplay('%')">%</button>
             <button class="operator" onclick="addToDisplay('÷')">÷</button>
             
             <button onclick="addToDisplay('7')">7</button>
@@ -66,9 +66,8 @@
                 currentInput = value;
             } else if (value === '.' && currentInput.includes('.')) {
                 return;
-            } else if (['÷', '×', '−', '+'].includes(currentInput[currentInput.length - 1]) && ['÷', '×', '−', '+'].includes(value)){
-                currentInput.slice(0, -1)
-                currentInput += value;
+            } else if (['÷', '×', '−', '+', '%'].includes(currentInput[currentInput.length - 1]) && ['÷', '×', '−', '+', '%'].includes(value)){
+                currentInput = currentInput.slice(0, -1) + value;
             } else {
                 currentInput += value;
             }
@@ -97,13 +96,24 @@
         }
 
         function switchSign() {
-            currentInput *= - 1;
-            updateDisplay()
+            if (currentInput === '0' || currentInput === 'Error') {
+                return;
+            }
+            
+            const lastChar = currentInput[currentInput.length - 1];
+            if (['÷', '×', '−', '+', '%'].includes(lastChar)) {
+                return;
+            }
+            
+            const numValue = parseFloat(currentInput.replace(/,/g, ''));
+            currentInput = (-numValue).toLocaleString();
+            
+            updateDisplay();
         }
 
         function calculate() {
             try {
-                let expression = currentInput.replace(/,/g, '').replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
+                let expression = currentInput.replace(/,/g, '').replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-').replace(/%/g, '/100');
                 
                 let result = eval(expression);
                 
@@ -138,6 +148,8 @@
             } else if (key === '/') {
                 event.preventDefault();                
                 addToDisplay('÷');
+            } else if (key === '%') {
+                addToDisplay('%');
             } else if (key === 'Enter' || key === '=') {
                 event.preventDefault();
                 calculate();
