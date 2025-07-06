@@ -66,7 +66,7 @@
                 currentInput = value;
             } else if (value === '.' && currentInput.includes('.')) {
                 return;
-            } else if (['÷', '×', '−', '+'].includes(currentInput[currentInput.length - 1])){
+            } else if (['÷', '×', '−', '+'].includes(currentInput[currentInput.length - 1]) && ['÷', '×', '−', '+'].includes(value)){
                 currentInput[currentInput.length - 1] = value;
             } else {
                 currentInput += value;
