@@ -174,27 +174,22 @@ button:active {
 }
 
 .equals {
-    background: linear-gradient(145deg, #ffb347, #ff9500);
-    border-color: #ff9500;
-    box-shadow: 
-        0 4px 15px rgba(0, 0, 0, 0.3),
-        0 0 20px rgba(255, 179, 71, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    background: linear-gradient(145deg, rgba(72, 187, 120, 0.8), rgba(72, 187, 120, 0.6));
+    backdrop-filter: blur(15px);
+    border-color: rgba(72, 187, 120, 0.6);
 }
 
 .equals:hover {
-    background: linear-gradient(145deg, #ffcc66, #ffb347);
+    background: linear-gradient(145deg, rgba(72, 187, 120, 0.9), rgba(72, 187, 120, 0.7));
     box-shadow: 
-        0 8px 25px rgba(0, 0, 0, 0.4),
-        0 0 30px rgba(255, 179, 71, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    transform: translateY(-3px);
+        0 10px 30px rgba(72, 187, 120, 0.4),
+        0 0 20px rgba(72, 187, 120, 0.5);
 }
 
 .clear, .plus-minus, .percentage {
-    background: linear-gradient(145deg, #8b5cf6, #7c3aed);
-    color: #ffffff;
-    border-color: #7c3aed;
+    background: linear-gradient(145deg, #ffffff, #36454F);
+    color: black;
+    border-color: #3C4141;
     box-shadow: 
         0 4px 15px rgba(0, 0, 0, 0.3),
         0 0 20px rgba(139, 92, 246, 0.3),
@@ -202,7 +197,6 @@ button:active {
 }
 
 .clear:hover, .plus-minus:hover, .percentage:hover {
-    background: linear-gradient(145deg, #a78bfa, #8b5cf6);
     box-shadow: 
         0 8px 25px rgba(0, 0, 0, 0.4),
         0 0 30px rgba(139, 92, 246, 0.5),
