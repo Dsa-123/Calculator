@@ -110,13 +110,14 @@ button:active {
 .operator:active {
     background: #808080;
 }
-.clear {
+.clear, .plus-minus {
     background: #4a4a4a;
     color: #ffffff;
 }
-.clear:active {
+.clear:active, .plus-minus:active {
     background: #606060;
 }
+
 .equals {
     background: #666666;
     color: white;
