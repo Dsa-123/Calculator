@@ -3,9 +3,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-    background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+    background: radial-gradient(circle at center, #1a1a1a 0%, #0d0d0d 100%);
     height: 100vh;
     padding: 0;
     margin: 0;
@@ -14,31 +15,48 @@ body {
     align-items: center;
     overflow: hidden;
 }
+
 .calculator {
-    background: #1a1a1a;
+    background: #2c2c2c;
     width: 450px;
     height: 600px;
     padding: 30px;
     display: flex;
     flex-direction: column;
-    border-radius: 20px;
+    border-radius: 25px;
     box-shadow: 
-        0 0 60px rgba(0, 0, 0, 0.9),
-        0 20px 40px rgba(0, 0, 0, 0.7),
-        0 10px 20px rgba(0, 0, 0, 0.5);
+        0 0 80px rgba(0, 0, 0, 0.9),
+        0 20px 60px rgba(0, 0, 0, 0.7),
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     position: relative;
-    border: 1px solid #333333;
+    border: 1px solid #404040;
+    transition: all 0.3s ease;
 }
+
+.calculator:hover {
+    box-shadow: 
+        0 0 100px rgba(0, 0, 0, 0.9),
+        0 25px 80px rgba(0, 0, 0, 0.7),
+        0 15px 40px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(0, 212, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
 .display-container {
-    background: #0d0d0d;
-    border-radius: 15px;
+    background: #1a1a1a;
+    border-radius: 20px;
     padding: 20px;
     margin-bottom: 30px;
     height: 120px;
     display: flex;
     flex-direction: column;
-    border: 1px solid #333333;
+    border: 1px solid #404040;
+    box-shadow: 
+        inset 0 2px 10px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(0, 212, 255, 0.05);
 }
+
 .previous-operation {
     color: #a0a0a0;
     font-size: 1.2rem;
@@ -50,8 +68,9 @@ body {
     justify-content: flex-end;
     margin-bottom: 5px;
 }
+
 .display {
-    color: #f8f9fa;
+    color: #f0f2f5;
     font-size: 3.5rem;
     font-weight: 200;
     text-align: right;
@@ -61,7 +80,9 @@ body {
     justify-content: flex-end;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    text-shadow: 0 0 10px rgba(240, 242, 245, 0.3);
 }
+
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -70,56 +91,127 @@ body {
     width: 100%;
     height: 400px;
 }
+
 button {
     border: none;
     font-size: 2rem;
     font-weight: 400;
     cursor: pointer;
-    border-radius: 50px;
-    transition: all 0.1s ease;
-    background: #2d2d2d;
-    color: white;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    background: #404040;
+    color: #f0f2f5;
     display: flex;
     align-items: center;
     justify-content: center;
     outline: none;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
-    border: 1px solid #404040;
+    border: 1px solid #555555;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
 }
 
-.icon{
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(0, 212, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-color: #666666;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:active {
+    transform: translateY(0px);
+    box-shadow: 
+        0 2px 10px rgba(0, 0, 0, 0.3),
+        inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
     width: 70%;
     height: 70%;
     object-fit: cover;
     padding: 4px;
-    /* filter: invert(1); */
+    filter: brightness(1.1);
 }
 
-button:focus {
-    outline: none;
-}
-button:active {
-    transform: scale(0.95);
-    background: #404040;
-}
 .operator, .equals {
-    background: #ec8e09;
-    color: whitesmoke;
+    background: linear-gradient(145deg, #00d4ff, #0099cc);
+    color: #ffffff;
+    border-color: #00b8e6;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(0, 212, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
-.operator:active, .equals:active {
-    background: #e19a37;
+
+.operator:hover, .equals:hover {
+    background: linear-gradient(145deg, #33ddff, #00b8e6);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(0, 212, 255, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
 }
+
+.equals {
+    background: linear-gradient(145deg, #ffb347, #ff9500);
+    border-color: #ff9500;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(255, 179, 71, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.equals:hover {
+    background: linear-gradient(145deg, #ffcc66, #ffb347);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(255, 179, 71, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+}
+
 .clear, .plus-minus, .percentage {
-    background: #ffffff80;
-    color: #000000;
+    background: linear-gradient(145deg, #8b5cf6, #7c3aed);
+    color: #ffffff;
+    border-color: #7c3aed;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(139, 92, 246, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
-.clear:active, .plus-minus:active, .percentage:active {
-    background: #ffffff;
+
+.clear:hover, .plus-minus:hover, .percentage:hover {
+    background: linear-gradient(145deg, #a78bfa, #8b5cf6);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(139, 92, 246, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
 }
 
 .zero {
-    border-radius: 50px;
+    border-radius: 20px;
     grid-column: span 2;
     max-width: 220px;
     width: 100%;
@@ -134,12 +226,14 @@ button:active {
         min-width: 350px;
     }
 }
+
 @media (max-width: 600px) {
     .calculator {
         width: 95vw;
         min-width: 300px;
         padding: 30px 20px;
         height: 80vh;
+        border-radius: 20px;
     }
     
     .display {
@@ -152,21 +246,25 @@ button:active {
         font-size: 1.8rem;
         width: 70px;
         height: 70px;
+        border-radius: 15px;
     }
     
     .zero {
         width: 160px;
         padding-left: 30px;
+        border-radius: 15px;
     }
     
     .buttons {
         gap: 15px;
     }
 }
+
 @media (max-height: 600px) {
     .calculator {
         height: 90vh;
         padding: 20px;
+        border-radius: 15px;
     }
     
     .display {
@@ -179,15 +277,16 @@ button:active {
         font-size: 1.6rem;
         width: 60px;
         height: 60px;
+        border-radius: 12px;
     }
     
     .zero {
         width: 140px;
         padding-left: 25px;
+        border-radius: 12px;
     }
     
     .buttons {
         gap: 12px;
     }
 }
-
