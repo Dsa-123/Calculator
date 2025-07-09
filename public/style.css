@@ -75,7 +75,7 @@ button {
     font-size: 2rem;
     font-weight: 400;
     cursor: pointer;
-    border-radius: 50%;
+    border-radius: 50px;
     transition: all 0.1s ease;
     background: #2d2d2d;
     color: white;
@@ -103,11 +103,11 @@ button:active {
     transform: scale(0.95);
     background: #404040;
 }
-.operator {
+.operator, .equals {
     background: #ec8e09;
     color: whitesmoke;
 }
-.operator:active {
+.operator:active, .equals:active {
     background: #e19a37;
 }
 .clear, .plus-minus, .percentage {
@@ -118,13 +118,6 @@ button:active {
     background: #ffffff;
 }
 
-.equals {
-    background: #e19a37;
-    color: whitesmoke;
-}
-.equals:active {
-    background: #d7a155;
-}
 .zero {
     border-radius: 50px;
     grid-column: span 2;
