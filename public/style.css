@@ -191,14 +191,14 @@ button:active {
     border-color: #3C4141;
     box-shadow: 
         0 4px 15px rgba(0, 0, 0, 0.3),
-        0 0 20px rgba(139, 92, 246, 0.3),
+        0 0 20px rgba(180, 180, 180, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .clear:hover, .plus-minus:hover, .percentage:hover {
     box-shadow: 
         0 8px 25px rgba(0, 0, 0, 0.4),
-        0 0 30px rgba(139, 92, 246, 0.5),
+        0 0 30px rgba(180, 150, 160, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
     transform: translateY(-3px);
 }
