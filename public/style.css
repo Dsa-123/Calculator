@@ -75,7 +75,7 @@ button {
     font-size: 2rem;
     font-weight: 400;
     cursor: pointer;
-    border-radius: 50px;
+    border-radius: 50%;
     transition: all 0.1s ease;
     background: #2d2d2d;
     color: white;
@@ -108,22 +108,22 @@ button:active {
     color: whitesmoke;
 }
 .operator:active {
-    background: #808080;
+    background: #e19a37;
 }
 .clear, .plus-minus, .percentage {
-    background: #4a4a4a;
+    background: #ffffff80;
     color: #000000;
 }
 .clear:active, .plus-minus:active, .percentage:active {
-    background: #606060;
+    background: #ffffff;
 }
 
 .equals {
-    background: #666666;
-    color: white;
+    background: #e19a37;
+    color: whitesmoke;
 }
 .equals:active {
-    background: #808080;
+    background: #d7a155;
 }
 .zero {
     border-radius: 50px;
