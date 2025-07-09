@@ -110,11 +110,11 @@ button:active {
 .operator:active {
     background: #808080;
 }
-.clear, .plus-minus {
+.clear, .plus-minus, .percentage {
     background: #4a4a4a;
     color: #ffffff;
 }
-.clear:active, .plus-minus:active {
+.clear:active, .plus-minus:active, .percentage:active {
     background: #606060;
 }
 
