@@ -187,7 +187,7 @@ button:active {
 
 .clear, .plus-minus, .percentage {
     background: linear-gradient(90deg, #8b8b8b, #36454F);
-    color: gray;
+    color: black;
     border-color: #3C4141;
     box-shadow: 
         0 4px 15px rgba(0, 0, 0, 0.3),
