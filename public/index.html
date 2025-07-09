@@ -88,7 +88,7 @@
                 return;
             } else if (['÷', '×', '−', '+', '%'].includes(currentInput[currentInput.length - 1]) && ['÷', '×', '−', '+', '%'].includes(value)){
                 currentInput = currentInput.slice(0, -1) + value;
-            } else if (currentInput.length = 1 && ['÷', '×', '−', '+', '%'].includes(value)){
+            } else if (currentInput.length === 1 && ['÷', '×', '−', '+', '%'].includes(value)){
                 currentInput += 0;
                 currentInput += value;
             } else {
