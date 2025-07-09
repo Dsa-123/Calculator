@@ -155,9 +155,9 @@ button:active {
 }
 
 .operator, .equals {
-    background: linear-gradient(145deg, #00d4ff, #0099cc);
+    background: linear-gradient(145deg, #8B0000, #C4A484);
     color: #ffffff;
-    border-color: #00b8e6;
+    border-color: #0F0F0F;
     box-shadow: 
         0 4px 15px rgba(0, 0, 0, 0.3),
         0 0 20px rgba(0, 212, 255, 0.3),
@@ -165,7 +165,6 @@ button:active {
 }
 
 .operator:hover, .equals:hover {
-    background: linear-gradient(145deg, #33ddff, #00b8e6);
     box-shadow: 
         0 8px 25px rgba(0, 0, 0, 0.4),
         0 0 30px rgba(0, 212, 255, 0.5),
