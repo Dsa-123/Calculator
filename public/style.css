@@ -93,7 +93,7 @@ button {
     height: 70%;
     object-fit: cover;
     padding: 4px;
-    filter: invert(1);
+    /* filter: invert(1); */
 }
 
 button:focus {
