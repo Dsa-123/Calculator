@@ -151,7 +151,7 @@ button:active {
     height: 70%;
     object-fit: cover;
     padding: 4px;
-    filter: brightness(1.1) invert(1);
+    filter: brightness(1.1);
 }
 
 .operator, .equals {
@@ -187,7 +187,7 @@ button:active {
 }
 
 .clear, .plus-minus, .percentage {
-    background: linear-gradient(145deg, #ffffff, #36454F);
+    background: linear-gradient(145deg, #8b8b8b, #36454F);
     color: black;
     border-color: #3C4141;
     box-shadow: 
