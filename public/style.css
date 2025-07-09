@@ -104,15 +104,15 @@ button:active {
     background: #404040;
 }
 .operator {
-    background: #666666;
-    color: white;
+    background: #ec8e09;
+    color: whitesmoke;
 }
 .operator:active {
     background: #808080;
 }
 .clear, .plus-minus, .percentage {
     background: #4a4a4a;
-    color: #ffffff;
+    color: #000000;
 }
 .clear:active, .plus-minus:active, .percentage:active {
     background: #606060;
